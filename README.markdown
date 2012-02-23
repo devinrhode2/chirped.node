@@ -1,0 +1,1 @@
+Foo bar baz, this is a fresh write of Chirped.it - On demand chat with some level of twitter integration
