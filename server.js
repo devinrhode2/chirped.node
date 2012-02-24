@@ -40,13 +40,6 @@ app.get('/', function(req, res){
 app.listen(14763); //vs 8080..? //14763
 
 var nowjs = require("now");
-console.log('Current nowjs var:');
-console.log(nowjs);
-nowjs.options.debug = true;
-
-console.log('New nowjs var: ');
-console.log(nowjs);
-
 var everyone = nowjs.initialize(app);
 
 everyone.connected(function(){
