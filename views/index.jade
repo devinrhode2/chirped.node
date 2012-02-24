@@ -1,2 +1,99 @@
-h1= title
-p Welcome to #{title}
+doctype 5
+html(lang='en')
+  head
+    include head
+    mixin setTitle('Scout.NODE')
+    mixin description('Scout is a fresh twist on searching the internet, it brings you closer to your answers in fewer clicks')
+    //-You know the answer is out there, and you'll Google till no end to find it. You'd feel bad asking someone if you didn't try Google first. You have a problem, and you know something.  At Scout, we believe Google is your friend, and that the most advanced technology is also very easy to use.
+    
+    :stylus
+      /*unfinified from index.php on night teaching edward*/
+      ::selection, ::-moz-selection, ::-webkit-selection
+        background: #549a2f
+        color: white
+      html 
+        background: #8abf4f
+        background: -moz-radial-gradient(circle, #d8e9af, #8abf4f)
+        background: -webkit-radial-gradient(circle, #d8e9af, #8abf4f)
+        background: -ms-radial-gradient(circle, #d8e9af, #8abf4f)
+        background: -o-radial-gradient(circle, #d8e9af, #8abf4f)
+        height: 100%
+      
+      body
+        //center:
+        margin: auto
+        width: auto
+        text-align: center
+      
+      
+      *, input
+          -moz-font-smoothing: antialiased!important
+          -o-font-smoothing: antialiased!important
+          -webkit-font-smoothing: antialiased!important
+          -ms-font-smoothing: antialiased!important
+          font-smoothing: antialiased!important
+          text-rendering: optimizeLegibility
+          font-family: "Myriad Pro", "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif
+      
+      
+      input[type="text"], input[type="password"], input[type="email"], select, textarea
+        -webkit-transition: border linear .2s, box-shadow linear .2s
+        -moz-transition: border linear .2s, box-shadow linear .2s
+        transition: border linear .2s, box-shadow linear .2s
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1)
+        -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1)
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1)
+      
+      input[type="text"], input[type="password"], input[type="email"], textarea, select, .uneditable-input
+        width: 124px
+        padding: 4px
+        color: gray
+        border: 1px solid #CCC
+        -webkit-border-radius: 5px
+        -moz-border-radius: 5px
+        border-radius: 5px
+      
+      input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, textarea:focus
+        outline: 0
+        border-color: rgba(82, 168, 236, 0.8)
+        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6)
+        -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6)
+        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6)
+      
+      .opacity
+        opacity: 0
+        -webkit-transition: opacity .9s
+        -moz-transition: opacity .9s
+        -ms-transition: opacity .9s
+        -o-transition: opacity .9s
+        transition: opacity .9s
+    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js")
+    script(src="http://chirped.it.nodester.com/nowjs/now.js")
+  body
+    div#messages
+    input#text-input(type="text")
+    input#send-button(type="button", value="Send")
+    
+    script
+      //would like to convert to :coffee, but docs for exactly how the arrow syntax works would be appreaited
+      now.receiveMessage = function(name, message){
+        $("#messages").append("<br>" + name + ": " + message);
+      }
+    
+      $("#send-button").click(function(){
+        now.distributeMessage($("#text-input").val());
+        $("#text-input").val("");
+      });
+    
+      now.name = prompt("What's your name?", "");
+
+
+  //-
+    script
+      var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+      (function(d,t){
+        var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.async = true;
+        g.src='//www.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)
+      }(document,'script'))
