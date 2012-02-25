@@ -5,55 +5,9 @@ html(lang='en')
     mixin setTitle('Chirped.it on Nodester')
     mixin description('A fresh write of Chirped.it using NowJS on Nodester (with express, jade, and stylus)')
     //-You know the answer is out there, and you'll Google till no end to find it. You'd feel bad asking someone if you didn't try Google first. You have a problem, and you know something.  At Scout, we believe Google is your friend, and that the most advanced technology is also very easy to use.
-    
-    :stylus
-      /*unfinified from index.php on night teaching edward*/
-      ::selection, ::-moz-selection, ::-webkit-selection
-        background: #549a2f
-        color: white
-      html
-        //radial-background(center, outer)
-        //  background: center
-          
-        radial-background(rgb(52, 52, 52), rgb(152, 152, 152));
-      
-      body
-        //center:
-        margin: auto
-        width: auto
-        text-align: center
-      
-      input[type="text"], input[type="password"], input[type="email"], select, textarea
-        -webkit-transition: border linear .2s, box-shadow linear .2s
-        -moz-transition: border linear .2s, box-shadow linear .2s
-        transition: border linear .2s, box-shadow linear .2s
-        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1)
-        -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1)
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1)
-      
-      input[type="text"], input[type="password"], input[type="email"], textarea, select, .uneditable-input
-        width: 124px
-        padding: 4px
-        color: gray
-        border: 1px solid #CCC
-        -webkit-border-radius: 5px
-        -moz-border-radius: 5px
-        border-radius: 5px
-      
-      input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, textarea:focus
-        outline: 0
-        border-color: rgba(82, 168, 236, 0.8)
-        -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6)
-        -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6)
-        box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6)
-      
-      .opacity
-        opacity: 0
-        -webkit-transition: opacity .9s
-        -moz-transition: opacity .9s
-        -ms-transition: opacity .9s
-        -o-transition: opacity .9s
-        transition: opacity .9s
+
+    link(rel='stylesheet', href='stylesheets/main.css')
+
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js")
     script(src="/nowjs/now.js")
   body
@@ -70,21 +24,23 @@ html(lang='en')
     
     script
       //would like to convert to :coffee, but docs for exactly how the arrow syntax works suck, better ones would be appreciated, would even consider a totally javascripty syntactic sugar compilation
- 
-      now.receiveMessage = function(name, message){
-        $("#messages").append("<br>" + name + ": " + message);
-      };
-    
-      $("#send-button").click(function(){
-        now.distributeMessage($("#text-input").val());
-        $("#text-input").val("");
-      });
+      $(document).ready(funciton(){
+        now.receiveMessage = function(name, message){
+          $("#messages").append("<br>" + name + ": " + message);
+        };
       
-      $(".change").click(function(){
-        now.changeRoom($(this).text());
+        $("#send-button").click(function(){
+          now.distributeMessage($("#text-input").val());
+          $("#text-input").val("");
+        });
+        
+        $(".change").click(function(){
+          now.changeRoom($(this).text());
+        });
+      
+        now.name = prompt("What's your name?", "");
       });
-    
-      now.name = prompt("What's your name?", "");
+
 
   //-
     script

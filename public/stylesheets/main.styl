@@ -1,0 +1,70 @@
+/**
+ * @author DevinRhode2@gmail.com (Devin Rhode)
+ * @fileoverview The broski is using nib, 
+ */
+
+//really, we want to average the center and outer
+radial-background(center, outer)
+  _red = red(center) + red(outer) / 2
+  _green = green(center) + green(outer) / 2
+  _blue = blue(center) + blue(outer) / 2
+  background rgb(_red, _green, _blue)
+  background -webkit-radial-gradient(circle, center, outer)
+  background -moz-radial-gradient(circle, center, outer)
+  background -ms-radial-gradient(circle, center, outer)
+  background -o-radial-gradient(circle, center, outer)
+  height 100%
+
+/*un-minified from index.php on night teaching edward*/
+::selection, ::-moz-selection, ::-webkit-selection
+  background: #549a2f
+  color: white
+
+html
+  radial-background rgb(52, 52, 52) rgb(152, 152, 152)
+
+body
+  //center:
+  margin: auto
+  width: auto
+  text-align: center
+
+input[type="text"], input[type="password"], input[type="email"], select, textarea
+  -webkit-transition: border linear .2s, box-shadow linear .2s
+  -moz-transition: border linear .2s, box-shadow linear .2s
+  transition: border linear .2s, box-shadow linear .2s
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1)
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1)
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1)
+
+input[type="text"], input[type="password"], input[type="email"], textarea, select, .uneditable-input
+  width: 124px
+  padding: 4px
+  color: gray
+  border: 1px solid #CCC
+  -webkit-border-radius: 5px
+  -moz-border-radius: 5px
+  border-radius: 5px
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="email"]:focus, textarea:focus
+  outline: 0
+  border-color: rgba(82, 168, 236, 0.8)
+  -webkit-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6)
+  -moz-box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6)
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1), 0 0 8px rgba(82, 168, 236, 0.6)
+
+.opacity
+  opacity: 0
+  -webkit-transition: opacity .9s
+  -moz-transition: opacity .9s
+  -ms-transition: opacity .9s
+  -o-transition: opacity .9s
+  transition: opacity .9s
+  
+//stange bug where if transitions were in same :stylus block, the background would fade in.
+*
+  -webkit-transition: all .9s;
+  -moz-transition: all .9s;
+  -ms-transition: all .9s;
+  -o-transition: all .9s;
+  transition: all .9s;
