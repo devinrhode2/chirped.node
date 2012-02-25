@@ -11,22 +11,41 @@ html(lang='en')
     script(src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js")
     script(src="/nowjs/now.js")
   body
-    div
-      a.change.selected(href="#") room 1 
-      span - 
-      a.change(href="#") room 2 
-      span - 
-      a.change(href="#") room 3 
-
+    :stylus
+      #someChat
+        postion: absolute
+        top: 0
+        left: 0
+        width: 300px
+        height: 120px
+        background: whitesmoke
+        font-size: 22px
+        
+    #someChat Some chat stuff by 
+      a(href='http://twitter.com/DevinRhode2')@DevinRhode2
+    
+    :stylus
+      #messages
+        height: 100%
+        width: 500px
+        background: rgba(255, 255, 255, 0.3)
+      .message
+        
     div#messages
-    input#text-input(type="text")
+    textarea#text-input(type="text")
     input#send-button(type="button", value="Send")
     
     script
-      //would like to convert to :coffee, but docs for exactly how the arrow syntax works suck, better ones would be appreciated, would even consider a totally javascripty syntactic sugar compilation
-      $(document).ready(funciton(){
+      //would like to convert to :coffee, but docs for exactly how the arrow syntax works suck, better ones would be appreciated, would even consider a totally javascripty syntactic sugar compilation a sort of 'whitescript'
+      $(document).ready(function(){
         now.receiveMessage = function(name, message){
-          $("#messages").append("<br>" + name + ": " + message);
+          $("#messages").append(
+            "<div class='message'>"+
+              "<a href='http://twitter.com/" + name +  "'>" + 
+                name + 
+              "</a>: " + message + 
+            "</div>";
+          );
         };
       
         $("#send-button").click(function(){
@@ -37,7 +56,9 @@ html(lang='en')
         $(".change").click(function(){
           now.changeRoom($(this).text());
         });
-      
+        
+        
+        
         now.name = prompt("What's your name?", "");
       });
 

@@ -58,6 +58,7 @@ app.get('/chat', function(req, res){
 
 app.listen(14763); //vs 8080..? //14763
 
+/*
 //Setup Socket.IO
 var io = io.listen(app);
 io.sockets.on('connection', function(socket){
@@ -70,6 +71,7 @@ io.sockets.on('connection', function(socket){
     console.log('Client Disconnected.');
   });
 });
+*/
 
 
 //Setup NowJS

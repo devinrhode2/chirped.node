@@ -5,9 +5,9 @@
 
 //really, we want to average the center and outer
 radial-background(center, outer)
-  _red = red(center) + red(outer) / 2
-  _green = green(center) + green(outer) / 2
-  _blue = blue(center) + blue(outer) / 2
+  _red = (red(center) + red(outer)) / 2
+  _green = (green(center) + green(outer)) / 2
+  _blue = (blue(center) + blue(outer)) / 2
   background rgb(_red, _green, _blue)
   background -webkit-radial-gradient(circle, center, outer)
   background -moz-radial-gradient(circle, center, outer)
@@ -21,10 +21,13 @@ radial-background(center, outer)
   color: white
 
 html
-  radial-background rgb(52, 52, 52) rgb(152, 152, 152)
+  radial-background rgb(64, 127, 191) white
+  height 200% //sort of rising sun position
+
 
 body
   //center:
+  position relative
   margin: auto
   width: auto
   text-align: center
