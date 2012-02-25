@@ -11,13 +11,11 @@ html(lang='en')
       ::selection, ::-moz-selection, ::-webkit-selection
         background: #549a2f
         color: white
-      html 
-        background: #8abf4f
-        background: -moz-radial-gradient(circle, #d8e9af, #8abf4f)
-        background: -webkit-radial-gradient(circle, #d8e9af, #8abf4f)
-        background: -ms-radial-gradient(circle, #d8e9af, #8abf4f)
-        background: -o-radial-gradient(circle, #d8e9af, #8abf4f)
-        height: 100%
+      html
+        //radial-background(center, outer)
+        //  background: center
+          
+        radial-background(rgb(52, 52, 52), rgb(152, 152, 152));
       
       body
         //center:
@@ -56,22 +54,34 @@ html(lang='en')
         -ms-transition: opacity .9s
         -o-transition: opacity .9s
         transition: opacity .9s
-    script(src="http://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js")
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js")
     script(src="/nowjs/now.js")
   body
+    div
+      a.change.selected(href="#") room 1 
+      span - 
+      a.change(href="#") room 2 
+      span - 
+      a.change(href="#") room 3 
+
     div#messages
     input#text-input(type="text")
     input#send-button(type="button", value="Send")
     
     script
-      //would like to convert to :coffee, but docs for exactly how the arrow syntax works would be appreaited
+      //would like to convert to :coffee, but docs for exactly how the arrow syntax works suck, better ones would be appreciated, would even consider a totally javascripty syntactic sugar compilation
+ 
       now.receiveMessage = function(name, message){
         $("#messages").append("<br>" + name + ": " + message);
-      }
+      };
     
       $("#send-button").click(function(){
         now.distributeMessage($("#text-input").val());
         $("#text-input").val("");
+      });
+      
+      $(".change").click(function(){
+        now.changeRoom($(this).text());
       });
     
       now.name = prompt("What's your name?", "");
@@ -85,3 +95,5 @@ html(lang='en')
         g.src='//www.google-analytics.com/ga.js';
         s.parentNode.insertBefore(g,s)
       }(document,'script'))
+
+

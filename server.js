@@ -3,12 +3,12 @@
  * Module dependencies.
  */
 
-var express = require('express');
+var express = require('express')
+  , io = require('socket.io');
 
 var app = module.exports = express.createServer();
 
-// Configuration
-
+// Configuration. created with `express --sessions --css stylus`
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
@@ -20,36 +20,55 @@ app.configure(function(){
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
 });
-
 app.configure('development', function(){
   app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
-
 app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
-// Routes
 
+// Routes
 app.get('/', function(req, res){
   res.render('index');
 }); //for now, index is one and only meta chat
 
-
+/*
+app.get('/chat', function(req, res){
+  var topic = 'chirped.it-meta'; //replace with actual topic from url
+  res.render('chat', {locals: {
+    title: topic
+  }});
+});
+*/
 
 app.listen(14763); //vs 8080..? //14763
 
-var nowjs = require("now");
-var everyone = nowjs.initialize(app);
-
-everyone.connected(function(){
-  console.log("Joined: " + this.now.name);
+//Setup Socket.IO
+var io = io.listen(app);
+io.sockets.on('connection', function(socket){
+  console.log('Client Connected');
+  socket.on('message', function(data){
+    socket.broadcast.emit('server_message',data);
+    socket.emit('server_message',data);
+  });
+  socket.on('disconnect', function(){
+    console.log('Client Disconnected.');
+  });
 });
 
-everyone.disconnected(function(){
+
+//Setup NowJS
+var nowjs = require("now");
+var everyone = nowjs.initialize(app);
+nowjs.on('connect', function(){
+  console.log("Joined: " + this.now.name);
+});
+nowjs.on('disconnect', function(){
   console.log("Left: " + this.now.name);
 });
 
+//NowJS stuff.
 everyone.now.distributeMessage = function(message){
   everyone.now.receiveMessage(this.now.name, message);
 };
